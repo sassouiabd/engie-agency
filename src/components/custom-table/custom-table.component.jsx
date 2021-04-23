@@ -17,10 +17,10 @@ import {
 export default function CustomTable({ data }) {
   const S = S_customTable();
 
-  const keys = Object.keys(data);
-  const values = Object.values(data);
+  const keys = data ? Object.keys(data) : null;
+  const values = data ? Object.values(data) : null;
 
-  return (
+  return data ? (
     <TableContainer component={Paper}>
       <Table className={S.table} aria-label='customized table'>
         <TableHead>
@@ -40,5 +40,5 @@ export default function CustomTable({ data }) {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  ) : null;
 }

@@ -1,26 +1,27 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { useTheme } from "@material-ui/core";
 
-export default function CustomDropDown() {
+export default function CustomDropDown({ data, action }) {
+  const t = useTheme();
+
   return (
-      <Autocomplete
-        id='combo-box-demo'
-        options={agencies}
-        getOptionLabel={option => option.name}
-        style={{ width: 300 }}
-        renderInput={params => (
-          <TextField {...params} label='Combo box' variant='outlined' />
-        )}
-      />
+    <Autocomplete
+      value={data[0].nom}
+      onChange={(event, newValue) => {
+        if (action && newValue) {
+          const { ID } = newValue;
+          action(ID);
+        }
+      }}
+      id='combo-box-demo'
+      options={data}
+      getOptionLabel={option => option.Nom}
+      style={{ width: 300, margin: `${t.spacing(1)}px 0px` }}
+      renderInput={params => (
+        <TextField {...params} label='Agence' variant='outlined' />
+      )}
+    />
   );
 }
-
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const agencies = [
-  { name: "Agence de Lyon", respName: "Jean", activity: "Électrique" },
-  { name: "Agence de Toulouse", respName: "Marc", activity: "Climatisation " },
-  { name: "Agence de Paris", respName: "Sophie", activity: "Plomberie" },
-  { name: "Agence de Grenoble", respName: "Claire", activity: "Électrique" },
-  { name: "Agence de Rennes", respName: "Hugo", activity: "Électrique" },
-];

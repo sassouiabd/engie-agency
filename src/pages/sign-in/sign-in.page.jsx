@@ -1,4 +1,3 @@
-
 import Copyright from "../../components/copyright/copyright.component";
 import packageJson from "../../../package.json";
 
@@ -16,11 +15,28 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
+//Redux
+import { setEmail_act, setPassword_act } from "../../redux/user/user.actions";
+import { useDispatch, useSelector } from "react-redux";
+
 // Styles
 import signIn_S from "./sign-in.styles";
+import { selectEmail, selectPassword } from "../../redux/user/user.selectors";
 
 export default function SignIn() {
   const S = signIn_S();
+  const dispatch = useDispatch();
+
+  const signInEmail = useSelector(selectEmail);
+  const signInPassword = useSelector(selectPassword);
+
+  const onEmailChange = e => {
+    dispatch(setEmail_act(e.target.value));
+  };
+
+  const onPasswordChange = e => {
+    dispatch(setPassword_act(e.target.value));
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -43,6 +59,8 @@ export default function SignIn() {
             name='email'
             autoComplete='email'
             autoFocus
+            onChange={onEmailChange}
+            defaultValue={signInEmail}
           />
           <TextField
             variant='outlined'
@@ -54,6 +72,8 @@ export default function SignIn() {
             type='password'
             id='password'
             autoComplete='current-password'
+            onChange={onPasswordChange}
+            defaultValue={signInPassword}
           />
           <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
