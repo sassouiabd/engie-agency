@@ -1,13 +1,10 @@
 import Copyright from "../../components/copyright/copyright.component";
-import packageJson from "../../../package.json";
 
 // Material UI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -47,7 +44,7 @@ export default function SignIn() {
   const onSubmitSiginIn = e => {
     e.preventDefault();
     dispatch(setIsSignIn_act(true));
-    history.push("/welcom");
+    history.push("/agency-collection");
   };
 
   return (
@@ -87,10 +84,6 @@ export default function SignIn() {
             onChange={onPasswordChange}
             defaultValue={signInPassword}
           />
-          <FormControlLabel
-            control={<Checkbox value='remember' color='primary' />}
-            label='Remember me'
-          />
           <Button
             type='submit'
             fullWidth
@@ -102,13 +95,8 @@ export default function SignIn() {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href='#' variant='body2'>
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <Link href='#' variant='body2'>
+              <Link href='/signup' variant='body2'>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -116,7 +104,7 @@ export default function SignIn() {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright website={packageJson.name} />
+        <Copyright />
       </Box>
     </Container>
   );

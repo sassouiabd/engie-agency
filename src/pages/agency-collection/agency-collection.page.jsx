@@ -3,7 +3,7 @@ import CustomDropDown from "../../components/custom-drop-down/custom-drop-down.c
 import CustomTable from "../../components/custom-table/custom-table.component";
 
 import { useDispatch, useSelector } from "react-redux";
-import { S_welcom } from "./agency-collection.styles";
+import { S_agencyCollection } from "./agency-collection.styles";
 
 import { setIsSignIn_act } from "../../redux/user/user.actions";
 import { Button } from "@material-ui/core";
@@ -18,9 +18,10 @@ import {
   setAgenciesLoaded_act,
 } from "../../redux/agencies/agencies.actions";
 import Spinner from "../../components/spinner/spinner.component";
+import { getServerAdress } from "../../utils";
 
 export default function AgencyCollection() {
-  const S = S_welcom();
+  const S = S_agencyCollection();
 
   const dispatch = useDispatch();
 
@@ -40,8 +41,9 @@ export default function AgencyCollection() {
           method: "GET",
           redirect: "follow",
         };
+        const serverAdress = getServerAdress();
         const response = await fetch(
-          "http://localhost:5000/agency/retriveAll",
+          `${serverAdress}/retriveAll`,
           requestOptions
         );
         const { agencies } = await response.json();

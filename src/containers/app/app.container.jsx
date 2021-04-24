@@ -1,3 +1,4 @@
+import SignUpPage from "../../pages/sign-up/sign-up.page";
 import SignInPage from "../../pages/sign-in/sign-in.page";
 import AgencyCollection from "../../pages/agency-collection/agency-collection.page";
 import { selectIsSignIn } from "../../redux/user/user.selectors";
@@ -21,7 +22,8 @@ const App = () => {
             {isSignIn ? <AgencyCollection /> : <Redirect to='/signin' />}
           </Route>
           <Route exact path='/signin' component={SignInPage} />
-          <Route exact path='/welcom'>
+          <Route exact path='/signup' component={SignUpPage} />
+          <Route exact path='/agency-collection'>
             {isSignIn ? <AgencyCollection /> : <Redirect to='/signin' />}
           </Route>
         </Switch>
