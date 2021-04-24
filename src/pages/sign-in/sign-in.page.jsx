@@ -97,7 +97,7 @@ export default function SignIn() {
             margin='normal'
             required
             fullWidth
-            id='email'
+            id='cy_email'
             label='Email Address'
             name='email'
             autoComplete='email'
@@ -110,15 +110,16 @@ export default function SignIn() {
             margin='normal'
             required
             fullWidth
-            name='password'
+            name='Password'
             label='Password'
             type='password'
-            id='password'
+            id='cy_password'
             autoComplete='current-password'
             onChange={onPasswordChange}
             defaultValue={password}
           />
           <Button
+            id="cy_submitSignin"
             fullWidth
             variant='contained'
             color='primary'

@@ -74,7 +74,12 @@ export default function AgencyCollection() {
     <Spinner />
   ) : (
     <div className={S.root}>
-      <Button variant='contained' color='secondary' onClick={logout}>
+      <Button
+        id='cy_logout'
+        variant='contained'
+        color='secondary'
+        onClick={logout}
+      >
         Logout
       </Button>
       <CustomDropDown />

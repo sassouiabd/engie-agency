@@ -29,7 +29,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "node deploy",
+    "tul": "react-scripts test",
+    "tup": "react-scripts test --watchAll=false ",
+    "cypress_h": "cypress run --headless",
+    "cypress_i": "cypress open",
+    "test": "npm run tul && npm run tilc",
+    "test-prod": "npm run tup && npm run tipc",
+    "cov": "npm test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^7.1.0"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "localUrl": "http://localhost:3000/",
+  "prodUrl": "http://heroku.com/",
+  "user": "user@gmail.com",
+  "pass": "password"
+}

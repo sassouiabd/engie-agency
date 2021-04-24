@@ -19,7 +19,7 @@ export default function CustomDropDown() {
           dispatch(setChoice_act(newValue));
         }
       }}
-      id='combo-box-demo'
+      id='cy-agency-label'
       options={Object.values(agencies)}
       getOptionLabel={option => option.Nom}
       style={{ width: 300, margin: `${t.spacing(1)}px 0px` }}
