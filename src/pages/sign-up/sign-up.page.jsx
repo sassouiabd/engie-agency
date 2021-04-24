@@ -17,6 +17,8 @@ import {
   setEmail_act,
   setIsSignIn_act,
   setPassword_act,
+  setToken_act,
+  setUserId_act,
 } from "../../redux/user/user.actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -54,10 +56,14 @@ export default function SignUpPage() {
           requestOptions
         );
         const res = await response.json();
-        if (!res.error) {
+
+        const { error, token, userId } = res;
+        if (!error && token && userId) {
           dispatch(setEmail_act(email));
           dispatch(setPassword_act(password));
           dispatch(setIsSignIn_act(true));
+          dispatch(setToken_act(token));
+          dispatch(setUserId_act(userId));
           history.push("/agency-collection");
         }
       }

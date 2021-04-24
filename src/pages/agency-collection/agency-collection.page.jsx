@@ -19,6 +19,7 @@ import {
 } from "../../redux/agencies/agencies.actions";
 import Spinner from "../../components/spinner/spinner.component";
 import { getServerAdress } from "../../utils";
+import { selectToken, selectUserId } from "../../redux/user/user.selectors";
 
 export default function AgencyCollection() {
   const S = S_agencyCollection();
@@ -27,6 +28,8 @@ export default function AgencyCollection() {
 
   const agencyLoaded = useSelector(selectAgenciesLoaded);
   const agenciesIsLoading = useSelector(selectAgenciesIsLoading);
+  const token = useSelector(selectToken);
+  const userId = useSelector(selectUserId);
 
   const logout = e => {
     e.preventDefault();
@@ -37,13 +40,18 @@ export default function AgencyCollection() {
     const fetchData = async () => {
       dispatch(setAgenciesIsLoading_act(true));
       try {
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+        myHeaders.append("userid", userId);
+
         const requestOptions = {
+          headers: myHeaders,
           method: "GET",
           redirect: "follow",
         };
         const serverAdress = getServerAdress();
         const response = await fetch(
-          `${serverAdress}/retriveAll`,
+          `${serverAdress}/agency/retriveAll`,
           requestOptions
         );
         const { agencies } = await response.json();

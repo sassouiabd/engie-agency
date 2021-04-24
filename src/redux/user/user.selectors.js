@@ -15,3 +15,10 @@ export const selectEmail = createSelector([selectUser], user =>
 export const selectPassword = createSelector([selectUser], user =>
   user ? user.password : null
 );
+export const selectToken = createSelector([selectUser], user =>
+  user ? user.token : null
+);
+
+export const selectUserId = createSelector([selectUser], user =>
+  user ? user.id : null
+);

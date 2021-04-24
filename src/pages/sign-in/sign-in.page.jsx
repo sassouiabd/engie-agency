@@ -17,6 +17,8 @@ import {
   setEmail_act,
   setIsSignIn_act,
   setPassword_act,
+  setToken_act,
+  setUserId_act,
 } from "../../redux/user/user.actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,14 +26,15 @@ import { useDispatch, useSelector } from "react-redux";
 import signIn_S from "./sign-in.styles";
 import { selectEmail, selectPassword } from "../../redux/user/user.selectors";
 import { useHistory } from "react-router-dom";
+import { getServerAdress } from "../../utils";
 
 export default function SignIn() {
   const S = signIn_S();
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const signInEmail = useSelector(selectEmail);
-  const signInPassword = useSelector(selectPassword);
+  const email = useSelector(selectEmail);
+  const password = useSelector(selectPassword);
 
   const onEmailChange = e => {
     dispatch(setEmail_act(e.target.value));
@@ -41,10 +44,41 @@ export default function SignIn() {
     dispatch(setPassword_act(e.target.value));
   };
 
-  const onSubmitSiginIn = e => {
-    e.preventDefault();
-    dispatch(setIsSignIn_act(true));
-    history.push("/agency-collection");
+  const signIn = async () => {
+    try {
+      if (email.length > 0 && password.length > 0) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var body = JSON.stringify({
+          email,
+          password,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: body,
+          redirect: "follow",
+        };
+
+        const serverAdress = getServerAdress();
+        const response = await fetch(
+          `${serverAdress}/auth/signin`,
+          requestOptions
+        );
+        const res = await response.json();
+        const { error, token, userId } = res;
+        if (!error && token && userId) {
+          dispatch(setIsSignIn_act(true));
+          dispatch(setToken_act(token));
+          dispatch(setUserId_act(userId));
+          history.push("/agency-collection");
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -69,7 +103,7 @@ export default function SignIn() {
             autoComplete='email'
             autoFocus
             onChange={onEmailChange}
-            defaultValue={signInEmail}
+            defaultValue={email}
           />
           <TextField
             variant='outlined'
@@ -82,15 +116,14 @@ export default function SignIn() {
             id='password'
             autoComplete='current-password'
             onChange={onPasswordChange}
-            defaultValue={signInPassword}
+            defaultValue={password}
           />
           <Button
-            type='submit'
             fullWidth
             variant='contained'
             color='primary'
             className={S.submit}
-            onClick={onSubmitSiginIn}
+            onClick={signIn}
           >
             Sign In
           </Button>

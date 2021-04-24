@@ -9,6 +9,8 @@ const USER_DEFAULT_STATE = {
   isSignIn: false,
   email: null,
   password: null,
+  token: null,
+  id: null,
 };
 
 //Reducer
@@ -40,6 +42,20 @@ const userReducer = handleActions(
       (state, action) => ({
         ...state,
         password: action.payload,
+      }),
+    ],
+    [
+      ACT.setToken_act,
+      (state, action) => ({
+        ...state,
+        token: action.payload,
+      }),
+    ],
+    [
+      ACT.setUserId_act,
+      (state, action) => ({
+        ...state,
+        id: action.payload,
       }),
     ],
   ]),
