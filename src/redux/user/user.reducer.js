@@ -5,7 +5,7 @@ import * as ACT from "./user.actions";
 //--------------------------------------------------------------------
 //Initial state
 const USER_DEFAULT_STATE = {
-  choice: -1,
+  choice: null,
   isSignIn: false,
   email: null,
   password: null,

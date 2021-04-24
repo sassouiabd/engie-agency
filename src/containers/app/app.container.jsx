@@ -1,5 +1,5 @@
 import SignInPage from "../../pages/sign-in/sign-in.page";
-import WelcomPage from "../../pages/welcom/welcom.page";
+import AgencyCollection from "../../pages/agency-collection/agency-collection.page";
 import { selectIsSignIn } from "../../redux/user/user.selectors";
 import { useSelector } from "react-redux";
 import {
@@ -18,11 +18,11 @@ const App = () => {
       <Container maxWidth='lg'>
         <Switch>
           <Route exact path='/'>
-            {isSignIn ? <WelcomPage /> : <Redirect to='/signin' />}
+            {isSignIn ? <AgencyCollection /> : <Redirect to='/signin' />}
           </Route>
           <Route exact path='/signin' component={SignInPage} />
           <Route exact path='/welcom'>
-            {isSignIn ? <WelcomPage /> : <Redirect to='/signin' />}
+            {isSignIn ? <AgencyCollection /> : <Redirect to='/signin' />}
           </Route>
         </Switch>
       </Container>

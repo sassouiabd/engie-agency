@@ -13,29 +13,34 @@ import {
   StyledTableCell,
   StyledTableRow,
 } from "./custom-table.styles";
+import { useSelector } from "react-redux";
+import { selectChoice } from "../../redux/user/user.selectors";
 
-export default function CustomTable({ data }) {
+export default function CustomTable() {
   const S = S_customTable();
 
-  const keys = data ? Object.keys(data) : null;
-  const values = data ? Object.values(data) : null;
+  const choice = useSelector(selectChoice);
 
-  return data ? (
+  return choice ? (
     <TableContainer component={Paper}>
       <Table className={S.table} aria-label='customized table'>
         <TableHead>
           <TableRow>
-            {keys.map(key => (
-              <StyledTableCell key={key}>{key}</StyledTableCell>
-            ))}
+            {Object.keys(choice).map(key =>
+              key === "_id" ? null : (
+                <StyledTableCell key={key}>{key}</StyledTableCell>
+              )
+            )}
           </TableRow>
         </TableHead>
 
         <TableBody>
-          <StyledTableRow key={values.name}>
-            {values.map(val => (
-              <StyledTableCell key={val}>{val}</StyledTableCell>
-            ))}
+          <StyledTableRow>
+            {Object.entries(choice).map(([key, val]) =>
+              key === "_id" ? null : (
+                <StyledTableCell key={val}>{val}</StyledTableCell>
+              )
+            )}
           </StyledTableRow>
         </TableBody>
       </Table>

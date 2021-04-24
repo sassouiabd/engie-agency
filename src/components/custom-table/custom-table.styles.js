@@ -22,6 +22,6 @@ export const StyledTableRow = withStyles(theme => ({
 
 export const S_customTable = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 500,
   },
 });
