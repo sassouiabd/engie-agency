@@ -16,16 +16,22 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
 //Redux
-import { setEmail_act, setPassword_act } from "../../redux/user/user.actions";
+import {
+  setEmail_act,
+  setIsSignIn_act,
+  setPassword_act,
+} from "../../redux/user/user.actions";
 import { useDispatch, useSelector } from "react-redux";
 
 // Styles
 import signIn_S from "./sign-in.styles";
 import { selectEmail, selectPassword } from "../../redux/user/user.selectors";
+import { useHistory } from "react-router-dom";
 
 export default function SignIn() {
   const S = signIn_S();
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const signInEmail = useSelector(selectEmail);
   const signInPassword = useSelector(selectPassword);
@@ -36,6 +42,12 @@ export default function SignIn() {
 
   const onPasswordChange = e => {
     dispatch(setPassword_act(e.target.value));
+  };
+
+  const onSubmitSiginIn = e => {
+    e.preventDefault();
+    dispatch(setIsSignIn_act(true));
+    history.push("/welcom");
   };
 
   return (
@@ -85,6 +97,7 @@ export default function SignIn() {
             variant='contained'
             color='primary'
             className={S.submit}
+            onClick={onSubmitSiginIn}
           >
             Sign In
           </Button>

@@ -5,7 +5,8 @@ import Container from "@material-ui/core/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { S_welcom } from "./welcom.styles";
 import { selectChoice } from "../../redux/user/user.selectors";
-import { setChoice_act } from "../../redux/user/user.actions";
+import { setChoice_act, setIsSignIn_act } from "../../redux/user/user.actions";
+import { Button } from "@material-ui/core";
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const agencies = [
@@ -46,8 +47,16 @@ export default function Welcom() {
   const choice = useSelector(selectChoice);
   const dispatch = useDispatch();
 
+  const logout = e => {
+    e.preventDefault();
+    dispatch(setIsSignIn_act(false));
+  };
+
   return (
     <Container maxWidth='lg' className={S.root}>
+      <Button variant='contained' color='secondary' onClick={logout}>
+        Logout
+      </Button>
       <CustomDropDown
         data={agencies}
         action={val => {

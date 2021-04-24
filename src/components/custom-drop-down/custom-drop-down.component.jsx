@@ -8,10 +8,13 @@ export default function CustomDropDown({ data, action }) {
 
   return (
     <Autocomplete
-      value={data[0].nom}
       onChange={(event, newValue) => {
-        if (action && newValue) {
-          const { ID } = newValue;
+        let ID = -1;
+
+        if (newValue) {
+          ID = newValue.ID;
+        }
+        if (action) {
           action(ID);
         }
       }}

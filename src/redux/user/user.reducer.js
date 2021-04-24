@@ -8,7 +8,7 @@ const USER_DEFAULT_STATE = {
   choice: -1,
   isSignIn: false,
   email: null,
-  password: true,
+  password: null,
 };
 
 //Reducer
