@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,58 +14,53 @@ import S_signUp from "./sign-up.styles";
 import Copyright from "../../components/copyright/copyright.component";
 import { getServerAdress } from "../../utils";
 import {
-  setEmail_act,
   setIsSignIn_act,
-  setPassword_act,
   setToken_act,
   setUserId_act,
 } from "../../redux/user/user.actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 export default function SignUp() {
   const S = S_signUp();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const signUp = async () => {
+  const onSubmit = async data => {
+    const { email, password } = data;
     try {
-      if (email.length > 0 && password.length > 0) {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-        var body = JSON.stringify({
-          email,
-          password,
-        });
+      var body = JSON.stringify({
+        email,
+        password,
+      });
 
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: body,
-          redirect: "follow",
-        };
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: body,
+        redirect: "follow",
+      };
 
-        const serverAdress = getServerAdress();
-        const response = await fetch(
-          `${serverAdress}/auth/signup`,
-          requestOptions
-        );
-        const res = await response.json();
+      const serverAdress = getServerAdress();
+      const response = await fetch(
+        `${serverAdress}/auth/signup`,
+        requestOptions
+      );
+      const res = await response.json();
 
-        const { error, token, userId } = res;
-        if (!error && token && userId) {
-          dispatch(setEmail_act(email));
-          dispatch(setPassword_act(password));
-          dispatch(setIsSignIn_act(true));
-          dispatch(setToken_act(token));
-          dispatch(setUserId_act(userId));
-          history.push("/agency-collection");
-        }
+      const { error, token, userId } = res;
+      if (!error && token && userId) {
+        dispatch(setIsSignIn_act(true));
+        dispatch(setToken_act(token));
+        dispatch(setUserId_act(userId));
+        history.push("/agency-collection");
       }
     } catch (err) {
       console.log(err);
@@ -82,7 +77,7 @@ export default function SignUp() {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form className={S.form} noValidate>
+        <form className={S.form} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -93,7 +88,7 @@ export default function SignUp() {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
-                onChange={e => setEmail(e.target.value)}
+                {...register("email")}
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,7 +101,7 @@ export default function SignUp() {
                 type='password'
                 id='password'
                 autoComplete='current-password'
-                onChange={e => setPassword(e.target.value)}
+                {...register("password")}
               />
             </Grid>
           </Grid>
@@ -115,7 +110,8 @@ export default function SignUp() {
             variant='contained'
             color='primary'
             className={S.submit}
-            onClick={signUp}
+            onClick={onSubmit}
+            type='submit'
           >
             Sign Up
           </Button>

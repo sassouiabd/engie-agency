@@ -11,20 +11,19 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 //Redux
 import {
-  setEmail_act,
   setIsSignIn_act,
-  setPassword_act,
   setToken_act,
   setUserId_act,
 } from "../../redux/user/user.actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // Styles
 import signIn_S from "./sign-in.styles";
-import { selectEmail, selectPassword } from "../../redux/user/user.selectors";
 import { useHistory } from "react-router-dom";
 import { getServerAdress } from "../../utils";
 
@@ -33,18 +32,22 @@ export default function SignIn() {
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const email = useSelector(selectEmail);
-  const password = useSelector(selectPassword);
+  const { register, handleSubmit } = useForm();
 
-  const onEmailChange = e => {
-    dispatch(setEmail_act(e.target.value));
-  };
+  const onSubmit = async data => {
+    const { password, email } = data;
 
-  const onPasswordChange = e => {
-    dispatch(setPassword_act(e.target.value));
-  };
-
-  const signIn = async () => {
+    const showSigningError = () => {
+      toast.error("Login or password are incorrect !", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    };
     try {
       if (email.length > 0 && password.length > 0) {
         var myHeaders = new Headers();
@@ -69,14 +72,18 @@ export default function SignIn() {
         );
         const res = await response.json();
         const { error, token, userId } = res;
+
         if (!error && token && userId) {
           dispatch(setIsSignIn_act(true));
           dispatch(setToken_act(token));
           dispatch(setUserId_act(userId));
           history.push("/agency-collection");
+        } else {
+          showSigningError();
         }
       }
     } catch (err) {
+      showSigningError();
       console.log(err);
     }
   };
@@ -91,7 +98,7 @@ export default function SignIn() {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <form className={S.form} noValidate>
+        <form className={S.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             variant='outlined'
             margin='normal'
@@ -102,21 +109,20 @@ export default function SignIn() {
             name='email'
             autoComplete='email'
             autoFocus
-            onChange={onEmailChange}
-            defaultValue={email}
+            {...register("email")}
           />
+
           <TextField
             variant='outlined'
             margin='normal'
             required
             fullWidth
-            name='Password'
+            name='password'
             label='Password'
             type='password'
             id='cy_password'
             autoComplete='current-password'
-            onChange={onPasswordChange}
-            defaultValue={password}
+            {...register("password")}
           />
           <Button
             id='cy_submitSignin'
@@ -124,7 +130,7 @@ export default function SignIn() {
             variant='contained'
             color='primary'
             className={S.submit}
-            onClick={signIn}
+            type='submit'
           >
             Sign In
           </Button>

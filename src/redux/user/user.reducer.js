@@ -7,8 +7,6 @@ import * as ACT from "./user.actions";
 const USER_DEFAULT_STATE = {
   choice: null,
   isSignIn: false,
-  email: null,
-  password: null,
   token: null,
   id: null,
 };
@@ -28,20 +26,6 @@ const userReducer = handleActions(
       (state, action) => ({
         ...state,
         isSignIn: action.payload,
-      }),
-    ],
-    [
-      ACT.setEmail_act,
-      (state, action) => ({
-        ...state,
-        email: action.payload,
-      }),
-    ],
-    [
-      ACT.setPassword_act,
-      (state, action) => ({
-        ...state,
-        password: action.payload,
       }),
     ],
     [

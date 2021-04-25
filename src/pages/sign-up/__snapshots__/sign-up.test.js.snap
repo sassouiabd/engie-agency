@@ -29,7 +29,6 @@ exports[`signUp component match snapshot reference 1`] = `
       </h1>
       <form
         class="makeStyles-form-3"
-        novalidate=""
       >
         <div
           class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
@@ -134,7 +133,7 @@ exports[`signUp component match snapshot reference 1`] = `
         <button
           class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-4 MuiButton-containedPrimary MuiButton-fullWidth"
           tabindex="0"
-          type="button"
+          type="submit"
         >
           <span
             class="MuiButton-label"

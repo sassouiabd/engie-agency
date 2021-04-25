@@ -5,6 +5,8 @@ import { selectIsSignIn } from "../../redux/user/user.selectors";
 import { useSelector } from "react-redux";
 import { Route, HashRouter, Switch, Redirect } from "react-router-dom";
 import { Container } from "@material-ui/core";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const isSignIn = useSelector(selectIsSignIn);
@@ -22,6 +24,7 @@ const App = () => {
             {isSignIn ? <AgencyCollection /> : <Redirect to='/signin' />}
           </Route>
         </Switch>
+        <ToastContainer />
       </Container>
     </HashRouter>
   );

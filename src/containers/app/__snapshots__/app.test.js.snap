@@ -32,7 +32,6 @@ exports[`App container match snapshot reference 1`] = `
         </h1>
         <form
           class="makeStyles-form-3"
-          novalidate=""
         >
           <div
             class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
@@ -103,7 +102,7 @@ exports[`App container match snapshot reference 1`] = `
                 autocomplete="current-password"
                 class="MuiInputBase-input MuiOutlinedInput-input"
                 id="cy_password"
-                name="Password"
+                name="password"
                 required=""
                 type="password"
                 value=""
@@ -126,7 +125,7 @@ exports[`App container match snapshot reference 1`] = `
             class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-4 MuiButton-containedPrimary MuiButton-fullWidth"
             id="cy_submitSignin"
             tabindex="0"
-            type="button"
+            type="submit"
           >
             <span
               class="MuiButton-label"
@@ -145,7 +144,6 @@ exports[`App container match snapshot reference 1`] = `
             >
               <a
                 class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorPrimary"
-                href="/signup"
               >
                 Don't have an account? Sign Up
               </a>
@@ -170,6 +168,9 @@ exports[`App container match snapshot reference 1`] = `
         </p>
       </div>
     </main>
+    <div
+      class="Toastify"
+    />
   </div>
 </DocumentFragment>
 `;

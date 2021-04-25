@@ -9,12 +9,6 @@ export const selectChoice = createSelector([selectUser], user =>
 export const selectIsSignIn = createSelector([selectUser], user =>
   user ? user.isSignIn : false
 );
-export const selectEmail = createSelector([selectUser], user =>
-  user ? user.email : null
-);
-export const selectPassword = createSelector([selectUser], user =>
-  user ? user.password : null
-);
 export const selectToken = createSelector([selectUser], user =>
   user ? user.token : null
 );
