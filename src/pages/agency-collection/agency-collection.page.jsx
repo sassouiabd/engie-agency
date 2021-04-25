@@ -31,7 +31,7 @@ export default function AgencyCollection() {
   const token = useSelector(selectToken);
   const userId = useSelector(selectUserId);
 
-  const logout = e => {
+  const logout = (e) => {
     e.preventDefault();
     dispatch(setIsSignIn_act(false));
   };
@@ -75,9 +75,9 @@ export default function AgencyCollection() {
   ) : (
     <div className={S.root}>
       <Button
-        id='cy_logout'
-        variant='contained'
-        color='secondary'
+        id="cy_logout"
+        variant="contained"
+        color="secondary"
         onClick={logout}
       >
         Logout

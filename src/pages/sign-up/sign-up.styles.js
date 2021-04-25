@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const S_signUp = makeStyles(theme => ({
+const S_signUp = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",

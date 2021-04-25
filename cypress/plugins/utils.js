@@ -11,7 +11,7 @@ export const getUrl = () => {
 };
 
 export const clearSessionStorage = () => {
-  cy.window().then(win => {
+  cy.window().then((win) => {
     win.sessionStorage.clear();
   });
 };

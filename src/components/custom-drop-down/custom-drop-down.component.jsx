@@ -19,12 +19,12 @@ export default function CustomDropDown() {
           dispatch(setChoice_act(newValue));
         }
       }}
-      id='cy-agency-label'
+      id="cy-agency-label"
       options={agencies ? Object.values(agencies) : [{ Nom: "Agency" }]}
-      getOptionLabel={option => option.Nom}
+      getOptionLabel={(option) => option.Nom}
       style={{ width: 300, margin: `${t.spacing(1)}px 0px` }}
-      renderInput={params => (
-        <TextField {...params} label='Agence' variant='outlined' />
+      renderInput={(params) => (
+        <TextField {...params} label="Agence" variant="outlined" />
       )}
     />
   );

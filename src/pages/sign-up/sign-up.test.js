@@ -17,10 +17,10 @@ describe("signUp component", () => {
     const dummyDispatch = jest.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    expect(dummyDispatch).not.toHaveBeenCalled()
+    expect(dummyDispatch).not.toHaveBeenCalled();
 
     const { asFragment } = render(<SignUp />);
 
-     expect(asFragment(<SignUp />)).toMatchSnapshot();
+    expect(asFragment(<SignUp />)).toMatchSnapshot();
   });
 });

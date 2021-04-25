@@ -6,22 +6,22 @@ import { useSelector } from "react-redux";
 import { Route, HashRouter, Switch, Redirect } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const isSignIn = useSelector(selectIsSignIn);
 
   return (
     <HashRouter>
-      <Container maxWidth='lg'>
+      <Container maxWidth="lg">
         <Switch>
-          <Route exact path='/'>
-            {isSignIn ? <AgencyCollection /> : <Redirect to='/signin' />}
+          <Route exact path="/">
+            {isSignIn ? <AgencyCollection /> : <Redirect to="/signin" />}
           </Route>
-          <Route exact path='/signin' component={SignInPage} />
-          <Route exact path='/signup' component={SignUp} />
-          <Route exact path='/agency-collection'>
-            {isSignIn ? <AgencyCollection /> : <Redirect to='/signin' />}
+          <Route exact path="/signin" component={SignInPage} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/agency-collection">
+            {isSignIn ? <AgencyCollection /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
         <ToastContainer />

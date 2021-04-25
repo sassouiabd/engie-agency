@@ -23,10 +23,10 @@ export default function CustomTable() {
 
   return choice ? (
     <TableContainer component={Paper}>
-      <Table className={S.table} aria-label='customized table'>
+      <Table className={S.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {Object.keys(choice).map(key =>
+            {Object.keys(choice).map((key) =>
               key === "_id" ? null : (
                 <StyledTableCell key={key}>{key}</StyledTableCell>
               )

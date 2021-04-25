@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
+import { toast } from "react-toastify";
 
 import Container from "@material-ui/core/Container";
 import S_signUp from "./sign-up.styles";
@@ -30,8 +31,20 @@ export default function SignUp() {
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     const { email, password } = data;
+    const showSigningError = () => {
+      toast.error("The user already exists or Email is empty!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    };
+
     try {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -61,63 +74,65 @@ export default function SignUp() {
         dispatch(setToken_act(token));
         dispatch(setUserId_act(userId));
         history.push("/agency-collection");
+      } else {
+        showSigningError();
       }
     } catch (err) {
+      showSigningError();
       console.log(err);
     }
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={S.paper}>
         <Avatar className={S.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component='h1' variant='h5'>
+        <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={S.form} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                id='email'
-                label='Email Address'
-                name='email'
-                autoComplete='email'
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
                 {...register("email")}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
                 {...register("password")}
               />
             </Grid>
           </Grid>
           <Button
             fullWidth
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             className={S.submit}
-            onClick={onSubmit}
-            type='submit'
+            type="submit"
           >
             Sign Up
           </Button>
-          <Grid container justify='flex-end'>
+          <Grid container justify="flex-end">
             <Grid item>
-              <Link href='/signin' variant='body2'>
+              <Link href="/signin" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const S_spinner = makeStyles(theme => ({
+const S_spinner = makeStyles((theme) => ({
   loaderContainer: {
     position: "absolute",
     left: "50%",

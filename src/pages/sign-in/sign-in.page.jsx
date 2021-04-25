@@ -34,7 +34,7 @@ export default function SignIn() {
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     const { password, email } = data;
 
     const showSigningError = () => {
@@ -89,55 +89,55 @@ export default function SignIn() {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={S.paper}>
         <Avatar className={S.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component='h1' variant='h5'>
+        <Typography component="h1" variant="h5">
           Sign in
         </Typography>
         <form className={S.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
-            id='cy_email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
+            id="cy_email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
             autoFocus
             {...register("email")}
           />
 
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
-            name='password'
-            label='Password'
-            type='password'
-            id='cy_password'
-            autoComplete='current-password'
+            name="password"
+            label="Password"
+            type="password"
+            id="cy_password"
+            autoComplete="current-password"
             {...register("password")}
           />
           <Button
-            id='cy_submitSignin'
+            id="cy_submitSignin"
             fullWidth
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             className={S.submit}
-            type='submit'
+            type="submit"
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item>
               <Link
-                variant='body2'
+                variant="body2"
                 onClick={() => {
                   history.push("/signup");
                 }}

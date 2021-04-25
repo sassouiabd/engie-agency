@@ -21,6 +21,6 @@ export const retrieveState = () => {
   return store ? store.getState() : null;
 };
 
-export const dispatchToState = props => {
+export const dispatchToState = (props) => {
   return store ? store.dispatch(props) : null;
 };

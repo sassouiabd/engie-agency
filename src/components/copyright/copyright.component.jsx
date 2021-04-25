@@ -6,9 +6,9 @@ const Copyright = ({
   website = packageJson.name,
   link = "https://www.engie.fr/",
 }) => (
-  <Typography variant='body2' color='textSecondary' align='center'>
+  <Typography variant="body2" color="textSecondary" align="center">
     {"Copyright © "}
-    <Link color='inherit' href={link}>
+    <Link color="inherit" href={link}>
       {website}
     </Link>{" "}
     {new Date().getFullYear()}
