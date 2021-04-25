@@ -119,7 +119,7 @@ export default function SignIn() {
             defaultValue={password}
           />
           <Button
-            id="cy_submitSignin"
+            id='cy_submitSignin'
             fullWidth
             variant='contained'
             color='primary'
@@ -130,7 +130,12 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href='/signup' variant='body2'>
+              <Link
+                variant='body2'
+                onClick={() => {
+                  history.push("/signup");
+                }}
+              >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

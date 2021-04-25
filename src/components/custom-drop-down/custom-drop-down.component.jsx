@@ -20,7 +20,7 @@ export default function CustomDropDown() {
         }
       }}
       id='cy-agency-label'
-      options={Object.values(agencies)}
+      options={agencies ? Object.values(agencies) : [{ Nom: "Agency" }]}
       getOptionLabel={option => option.Nom}
       style={{ width: 300, margin: `${t.spacing(1)}px 0px` }}
       renderInput={params => (

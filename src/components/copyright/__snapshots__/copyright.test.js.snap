@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Copyright component match snapshot reference 1`] = `
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+  >
+    Copyright © 
+    <a
+      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit"
+      href="https://www.engie.fr/"
+    >
+      engie-agency
+    </a>
+     2021.
+  </p>
+</DocumentFragment>
+`;

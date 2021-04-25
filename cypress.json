@@ -1,6 +1,6 @@
 {
   "localUrl": "http://localhost:3000/",
-  "prodUrl": "http://heroku.com/",
+  "prodUrl": "https://engie-serv.herokuapp.com",
   "user": "user@gmail.com",
   "pass": "password"
 }

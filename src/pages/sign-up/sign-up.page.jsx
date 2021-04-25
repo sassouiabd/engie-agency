@@ -23,7 +23,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-export default function SignUpPage() {
+export default function SignUp() {
   const S = S_signUp();
 
   const [email, setEmail] = useState("");
